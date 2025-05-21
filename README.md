@@ -1,48 +1,22 @@
-# Astro Starter Kit: Basics
+# Problem:
+AstroJS adds `<style>` script inside body when any Preact component is rendered with `client` directive not on the top level (inside astro component, eg. inside Layout)  
 
-```sh
-npm create astro@latest -- --template basics
-```
+This causes HTML validation error:  
+<img width="668" alt="Screenshot 2025-05-21 at 11 34 14" src="https://github.com/user-attachments/assets/28abfa19-4aec-423a-9efd-1e1eb3025efc" />
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Setup
+Using Preact and standard `create astro` project
+There is the [simpliest example](https://github.com/AnaMoskvina/astrojs-test/tree/main) with [Layout](https://github.com/AnaMoskvina/astrojs-test/blob/main/src/layouts/Layout.astro) and [Component](https://github.com/AnaMoskvina/astrojs-test/blob/main/src/components/test.jsx)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Screenshots
+When Test component (client:load) is rendered inside the Layout as slot - `<style>` is added to `<body>` (same happens when Preact component is redered inside astro component *not* as a slot)
+<img width="668" alt="Screenshot 2025-05-20 at 19 52 46" src="https://github.com/user-attachments/assets/9fb8081e-8288-4d35-94ff-01ef2d5b7dc9" />
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
 
-## 🚀 Project Structure
+When Test component (client:load) is rendered outside the Layout
+<img width="668" alt="Screenshot 2025-05-20 at 19 53 32" src="https://github.com/user-attachments/assets/872d5516-bfa4-4284-8c41-0aa3fffe8858" />
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Questions:
+1. Is this issue is going to be solved?
+2. Is there's a a way to make `<style>astro-island,astro-slot,astro-static-slot{display:contents}</style>` be added to `<head>`, not to the `<body>`?
+3. Are components with client directive supposed to be rendered in astro components and layouts in general?
